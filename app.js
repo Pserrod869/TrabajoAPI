@@ -34,9 +34,9 @@ async function fetchHeroData(name) {
         const data = await response.json();
 
         // Comprobamos si la API nos devuelve resultados válidos
-        if (data.response === 'success') {
-            // Pasamos el primer resultado encontrado a la función de renderizado
-            renderHero(data.results[0]); 
+        if (data.response === 'success' && data.results.length > 0) {
+            // Mostramos todos los resultados encontrados
+            renderAllHeroes(data.results);
         } else {
             resultsContainer.innerHTML = `<p style="color:#e94560;">No se encontró ningún héroe con el nombre "${name}".</p>`;
         }
@@ -46,9 +46,9 @@ async function fetchHeroData(name) {
     }
 }
 
-// Función para pintar los datos en el HTML
-function renderHero(hero) {
-    resultsContainer.innerHTML = `
+// Función para pintar todos los héroes en el HTML
+function renderAllHeroes(heroes) {
+    resultsContainer.innerHTML = heroes.map(hero => `
         <div class="hero-card">
             <h2>${hero.name}</h2>
             <p><strong>Nombre real:</strong> ${hero.biography['full-name'] || 'Desconocido'}</p>
@@ -66,5 +66,5 @@ function renderHero(hero) {
                 <div class="stat-item"><strong>⚔️ Combate:</strong> ${hero.powerstats.combat}</div>
             </div>
         </div>
-    `;
+    `).join('');
 }

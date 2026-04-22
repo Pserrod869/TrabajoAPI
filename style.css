@@ -81,12 +81,19 @@ button:hover {
     background-color: #c83349;
 }
 
+.results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .hero-card {
     background-color: #0f3460;
     border-radius: 12px;
     padding: 25px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     animation: fadeIn 0.5s ease;
+    margin-bottom: 15px;
 }
 
 .hero-card img {
